@@ -1,12 +1,79 @@
 <!doctype html> 
 <html lang="en"> 
-<head> 
-	<meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
     <title>Phaser - Making your first game, part 9</title>
-	<script type="text/javascript" src="js/phaser.min.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-    <style type="text/css"> body { margin: 0; } </style>
+  <script type="text/javascript" src="js/phaser.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+    <style type="text/css"> body { margin: 0; }
+                            ul {color:white;} </style>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background-color: black;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <img src="assets/ultimate-basketball-logo.png" />
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div>
+          <ul>
+            <br><br><br><br><br><br>
+            <h3>How To Play:</h3>
+            <br>
+            <h4>Controls:</h4>
+            <li>Shoot: Spacebar</li>
+            <li>Pass: Enter</li>
+            <li>Movement: Arrow Keys</li>
+            <li>Crossover: Left+Right</li>
+            <li>Stealing: If you touch the player with the ball you will steal it.</li>
+
+            <br>
+            <h4>Rules:</h4>
+            <li>There are four 3 minute quarters.</li>
+            <li>If the game is tied at the end then the game will continue until the next score.</li>
+        </ul>
+      </div>
+      </div>
+      <div class="col-md-8">
+        <div id="theGame"></div>
+      </div>
+      <div class="col-md-2">
+          <ul>
+          <h3>About Us:</h3>
+          <br/>
+        <li>SparkBall(working title) was a
+        collaboration between the organization
+        Spark and the tech startup RJMetrics.</li>
+        <li>It was built by three sets of middle
+        school students and their mentors.</li>
+        <br>
+        <h4>The Students:</h4>
+        <li>Zane Rose</li>
+        <li>Josh Woodz</li>
+        <li>Zahir Wheeler</li>
+        <li>Shawn Donaldson</li>
+        <li>Stephon McCray</li>
+        <br>
+        <h4>The Mentors:</h4>
+        <li>Brian Sloane</li>
+        <li>Rohan Shah</li>
+        <li>Kurt Wheeler</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
