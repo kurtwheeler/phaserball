@@ -13,9 +13,10 @@ var court;
 var cursors;
 var position;
 var holdsBall;
-var score = 0;
-var scoreText;
-var shootTween;
+var score1 = 0;
+var score2 = 0;
+var scoreText1;
+var scoreText2;
 
 function create() {
 
@@ -39,14 +40,13 @@ function create() {
     player.animations.add('right', [5, 6, 7, 8], 10, true);
 
     //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText1 = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText2 = game.add.text(1000, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
     passButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     shootButton = game.input.keyboard.addKey(Phaser.Keyboard.S);
-    
-    shootTween = game.add.tween(basketball);
 }
 
 function update() {
@@ -59,6 +59,10 @@ function update() {
 
     if (cursors.left.isDown)
     {
+        if(position != "left" && holdsBall) {
+            basketball.reset(player.x - 15, player.y + 20);
+        }
+
         player.body.velocity.x = -150;
         player.animations.play('left');
         position = "left";
@@ -70,6 +74,10 @@ function update() {
     }
     else if (cursors.right.isDown)
     {
+        if(position != "right" && holdsBall) {
+            basketball.reset(player.x + 22, player.y + 20);
+        }
+
         player.body.velocity.x = 150;
         player.animations.play('right');
         position = "right";
@@ -84,7 +92,7 @@ function update() {
 
         player.frame = 4;
     }
-    
+
     if (cursors.up.isDown)
     {
         player.body.velocity.y = -150;
@@ -112,34 +120,56 @@ function update() {
         holdsBall = false;
     }
 
+    if(basketball.x > 1091 && basketball.x < 1168 && basketball.y > 329 && basketball.y < 375) {
+        scored2();
+        holdsBall = false;
+        basketball.reset((game.world.width/2)-8, (game.world.height/2)+5);
+    }
+
+    if(basketball.x < 91 && basketball.x > 25 && basketball.y > 329 && basketball.y < 375) {
+        scored1();
+        holdsBall = false;
+        basketball.reset((game.world.width/2)-8, (game.world.height/2)+5);
+    }
+
 }
 
 function holding (player, basketball) {
-    
+
     // Removes the star from the screen
     holdsBall = true;
 
 }
 
-function scored(ball, hoop) {
+function scored1() {
 
     //  Add and update the score
-    score += 2;
-    scoreText.text = 'Score: ' + score;
+    score1 += 2;
+    scoreText1.text = 'Score: ' + score1;
+}
+
+function scored2() {
+
+    //  Add and update the score
+    score2 += 2;
+    scoreText2.text = 'Score: ' + score2;
 }
 
 function passBall(){
+
+    distance = 300;
+
     if(position == "right") {
-        basketball.reset(basketball.x + 30, basketball.y);
+        basketball.reset(basketball.x + distance, basketball.y);
     }
     else if(position == "left") {
-        basketball.reset(basketball.x - 30, basketball.y);
+        basketball.reset(basketball.x - distance, basketball.y);
     }
     else if(position == "up") {
-        basketball.reset(basketball.x, basketball.y - 30);
+        basketball.reset(basketball.x, basketball.y - distance);
     }
     else if(position == "down") {
-        basketball.reset(basketball.x, basketball.y + 30);
+        basketball.reset(basketball.x, basketball.y + distance);
     }
 
     holdsBall = false;
