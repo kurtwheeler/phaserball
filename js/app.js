@@ -1,8 +1,8 @@
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1200, 720, Phaser.CANVAS, 'theGame', { preload: preload, create: create, update: update });
 
 function preload() {
 
-    game.load.image('court', 'assets/court.png');
+    game.load.image('court', 'assets/court-small.png');
     game.load.image('basketball', 'assets/basketball.gif');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 
@@ -24,8 +24,6 @@ function create() {
 
     //  A simple background for our game
     court = game.add.sprite(0, 0, 'court');
-
-    court.scale.setTo(0.385,0.5);
 
     player = game.add.sprite((game.world.width/2)-50, (game.world.height/2)-15, 'dude');
     game.physics.arcade.enable(player);
