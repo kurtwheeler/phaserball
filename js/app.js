@@ -17,6 +17,9 @@ var score1 = 0;
 var score2 = 0;
 var scoreText1;
 var scoreText2;
+var pauseTime = 0;
+var paused = false;
+var passTime = 0;
 
 function create() {
 
@@ -50,12 +53,19 @@ function create() {
 }
 
 function update() {
+  if(game.time.now - pauseTime > 2000) {
+    if(paused) {
+      basketball.reset((game.world.width/2)-8, (game.world.height/2)+5);
+      paused = false;
+    }
     game.physics.arcade.overlap(player, basketball, holding);
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
-    basketball.body.velocity.x = 0;
-    basketball.body.velocity.y = 0;
+    if(game.time.now - passTime > 2000) {
+      basketball.body.velocity.x = 0;
+      basketball.body.velocity.y = 0;
+    }
 
     if (cursors.left.isDown)
     {
@@ -121,17 +131,17 @@ function update() {
     }
 
     if(basketball.x > 1091 && basketball.x < 1168 && basketball.y > 329 && basketball.y < 375) {
+        scored();
         scored2();
         holdsBall = false;
-        basketball.reset((game.world.width/2)-8, (game.world.height/2)+5);
     }
 
     if(basketball.x < 91 && basketball.x > 25 && basketball.y > 329 && basketball.y < 375) {
+        scored();
         scored1();
         holdsBall = false;
-        basketball.reset((game.world.width/2)-8, (game.world.height/2)+5);
     }
-
+  }
 }
 
 function holding (player, basketball) {
@@ -141,35 +151,54 @@ function holding (player, basketball) {
 
 }
 
-function scored1() {
+function scored () {
+    pauseTime = game.time.now;
+    paused = true;
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
+    basketball.body.velocity.x = 0;
+    basketball.body.velocity.y = 0;
 
+    player.animations.stop();
+
+    player.frame = 4;
+}
+
+function scored1() {
     //  Add and update the score
     score1 += 2;
     scoreText1.text = 'Score: ' + score1;
 }
 
 function scored2() {
-
     //  Add and update the score
     score2 += 2;
     scoreText2.text = 'Score: ' + score2;
 }
 
 function passBall(){
-
-    distance = 300;
+    distance = 20;
 
     if(position == "right") {
         basketball.reset(basketball.x + distance, basketball.y);
+        basketball.body.velocity.x = 300;
+        passTime = game.time.now;
+
     }
     else if(position == "left") {
         basketball.reset(basketball.x - distance, basketball.y);
+        basketball.body.velocity.x = -300;
+        passTime = game.time.now;
     }
     else if(position == "up") {
         basketball.reset(basketball.x, basketball.y - distance);
+        basketball.body.velocity.y = -300;
+        passTime = game.time.now;
     }
     else if(position == "down") {
         basketball.reset(basketball.x, basketball.y + distance);
+        basketball.body.velocity.y = 300;
+        passTime = game.time.now;
     }
 
     holdsBall = false;
