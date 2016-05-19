@@ -4,7 +4,8 @@ function preload() {
 
     game.load.image('court', 'assets/court-small.png');
     game.load.image('basketball', 'assets/basketball.gif');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.spritesheet('sean', 'assets/sean.png', 80, 120);
+    game.load.spritesheet('zahir', 'assets/d1zahh.png', 80, 120);
 
 }
 
@@ -29,7 +30,7 @@ function create() {
     //  A simple background for our game
     court = game.add.sprite(0, 0, 'court');
 
-    player = game.add.sprite((game.world.width/2)-50, (game.world.height/2)-15, 'dude');
+    player = game.add.sprite((game.world.width/2)-50, (game.world.height/2)-15, 'sean');
     game.physics.arcade.enable(player);
 
     basketball = game.add.sprite((game.world.width/2)-8, (game.world.height/2)+5, 'basketball');
